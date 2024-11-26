@@ -27,7 +27,9 @@ jobs:
          #Goals: clean package           
       - name: Build with Maven
         run: |
-            mvn clean package org.jacoco:jacoco-maven-plugin:0.8.8:report 
+         mvn clean package \
+           -Djacoco.version=0.8.7
+       #  mvn clean package org.jacoco:jacoco-maven-plugin:0.8.8:report 
        # Publish artifacts
       - name: Upload artifacts
         if: always()
