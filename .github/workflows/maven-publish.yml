@@ -35,7 +35,7 @@ jobs:
         with:
           name: JBoss7FreeMemLogger-0.2.0-jar-with-dependencies
           path: |
-            target\JBoss7FreeMemLogger-0.2.0.jar      
+             ${{ github.workspace }}\target\JBoss7FreeMemLogger-0.2.0.jar      
       
              
               
