@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
          java-version: '1.8'
+         distribution: 'temurin'
          #JVM parameters
       - name: set jvm options for maven
         run: echo "MAVEN_OPTS=-Xms768m -Xmx2048m" >> $GITHUB_ENV   
