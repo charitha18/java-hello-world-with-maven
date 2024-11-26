@@ -1,0 +1,34 @@
+name: JBoss7FreeMemLogger
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code
+      - name: checkout the repository
+        uses: actions/checkout@v4
+      # TeamCity Step 1: Version POM's, creating the build number of certain pattern
+      - name: Version POM's
+        shell: pwsh
+        run: |
+           $buildNumber = "1.0.0.${{ github.run_number }}.${{ github.sha }}"
+           $GitHash = "${{ github.sha }}"
+           $ShortGitHash = $GitHash.substring(0,7)
+           $ProductVersion = "${{ github.run_number }}"
+           $ShortProductVersion = $buildNumber -replace $GitHash, $ShortGitHash       
+      - name: set up java JDK
+        uses: actions/setup-java@v4
+        with:
+         java-version: '1.8'
+         #JVM parameters
+      - name: set jvm options for maven
+        run: echo "MAVEN_OPTS=-Xms768m -Xmx2048m" >> $GITHUB_ENV   
+         #Goals: clean package           
+      - name: Build with Maven
+        run: |
+            mvn clean package org.jacoco:jacoco-maven-plugin:0.8.8:report 
+      
+             
+              
+         
+          
