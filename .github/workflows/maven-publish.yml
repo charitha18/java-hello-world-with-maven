@@ -28,6 +28,14 @@ jobs:
       - name: Build with Maven
         run: |
             mvn clean package org.jacoco:jacoco-maven-plugin:0.8.8:report 
+       # Publish artifacts
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: JBoss7FreeMemLogger-0.2.0-jar-with-dependencies
+          path: |
+            target\JBoss7FreeMemLogger-0.2.0-jar-with-dependencies.jar      
       
              
               
